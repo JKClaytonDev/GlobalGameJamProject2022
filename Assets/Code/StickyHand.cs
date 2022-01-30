@@ -48,13 +48,13 @@ public class StickyHand : MonoBehaviour
             }
             else
             {
-                transform.position = Vector3.MoveTowards(transform.position, parent.transform.position, Time.deltaTime * 25);
+                transform.position = Vector3.MoveTowards(transform.position, parent.transform.position, Time.deltaTime * 75);
                 if (lastStick != new Vector3())
                 stuckTo.GetComponent<Rigidbody>().velocity = (transform.position - lastStick)/Time.deltaTime;
                 lastStick = transform.position;
             }
             
-            if (Vector3.Distance(transform.position, player.transform.position) < 1)
+            if (Vector3.Distance(transform.position, player.transform.position) < 2)
             {
                 pull = false;
             }

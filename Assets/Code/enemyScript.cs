@@ -10,13 +10,25 @@ public class enemyScript : MonoBehaviour
     float targetTime;
     public GameObject ragdoll;
     Animator anim;
+    AnimationEvent evt;
     // Start is called before the first frame update
     void Start()
     {
+        
         anim = GetComponent<Animator>();
         targetMode = 1;
         player = Camera.main.gameObject;
         n = GetComponent<NavMeshAgent>();
+    }
+    public void Shoot()
+    {
+        RaycastHit h2;
+        transform.LookAt(player.transform);
+        Physics.Raycast(transform.position, transform.forward, out h2);
+        if (h2.transform.gameObject == player)
+        {
+            player.GetComponent<PlayerMovement>().takeDamage();
+        }
     }
 
     // Update is called once per frame
@@ -33,10 +45,12 @@ public class enemyScript : MonoBehaviour
                 NavMesh.SamplePosition(randomDirection, out hit, 25, 1);
                 Vector3 finalPosition = hit.position;
                 n.SetDestination(finalPosition);
+                
+                anim.speed = Random.Range(0.7f, 1.3f);
             }
             targetTime = Time.realtimeSinceStartup + Random.Range(3, 6);
         }
-        n.speed = 5;
+        n.speed = anim.speed * 5;
         anim.SetBool("Shooting", false);
         if (n.remainingDistance < 5)
         {

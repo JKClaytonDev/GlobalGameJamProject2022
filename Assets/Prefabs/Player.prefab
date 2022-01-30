@@ -1686,6 +1686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ae0b8953645bf42990ba40a2cb9c4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  s: {fileID: 0}
   groundDistance: 1.01
   onGround: 0
   groundLayers:
@@ -1693,6 +1694,8 @@ MonoBehaviour:
     m_Bits: 2147483647
   leftHand: {fileID: 1190127534583453522}
   rightHand: {fileID: 2037113014143946191}
+  health: 0
+  healthImage: {fileID: 0}
 --- !u!54 &2037113014501748166
 Rigidbody:
   m_ObjectHideFlags: 0
