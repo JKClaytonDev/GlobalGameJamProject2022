@@ -38,6 +38,11 @@ public class StickyHand : MonoBehaviour
             localPos = Vector3.MoveTowards(localPos, playerRB.velocity / 255, Time.deltaTime);
             transform.position += localPos;
             lastStick = new Vector3();
+            if (stuckTo.GetComponent<NavMeshAgent>())
+            {
+                stuckTo.GetComponent<NavMeshAgent>().enabled = true;
+                stuckTo.GetComponent<enemyScript>().recalculate();
+            }
         }
         else
         {
@@ -56,7 +61,7 @@ public class StickyHand : MonoBehaviour
                 if (lastStick != new Vector3())
                 stuckTo.GetComponent<Rigidbody>().velocity = (transform.position - lastStick)/Time.deltaTime;
                 if (stuckTo.GetComponent<NavMeshAgent>())
-                    stuckTo.GetComponent<NavMeshAgent>().enabled = Vector3.Distance(transform.position, player.transform.position) > 2;
+                    stuckTo.GetComponent<NavMeshAgent>().enabled = false;
                 lastStick = transform.position;
             }
             

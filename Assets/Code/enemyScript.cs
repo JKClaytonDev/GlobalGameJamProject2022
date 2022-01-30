@@ -22,6 +22,16 @@ public class enemyScript : MonoBehaviour
         player = Camera.main.gameObject;
         n = GetComponent<NavMeshAgent>();
     }
+    public void recalculate()
+    {
+        activated = true;
+        Vector3 randomDirection = Random.insideUnitSphere * 25;
+        randomDirection += transform.position;
+        NavMeshHit hit;
+        NavMesh.SamplePosition(randomDirection, out hit, 25, 1);
+        Vector3 finalPosition = hit.position;
+        n.SetDestination(finalPosition);
+    }
     public void Shoot()
     {
         RaycastHit h2;
@@ -45,15 +55,7 @@ public class enemyScript : MonoBehaviour
             Physics.Raycast(transform.position, transform.forward, out h2);
             n.SetDestination(transform.position);
             if (h2.transform.gameObject == player && h2.distance < 55)
-            {
-                activated = true;
-                Vector3 randomDirection = Random.insideUnitSphere * 25;
-                randomDirection += transform.position;
-                NavMeshHit hit;
-                NavMesh.SamplePosition(randomDirection, out hit, 25, 1);
-                Vector3 finalPosition = hit.position;
-                n.SetDestination(finalPosition);
-            }
+                recalculate();
             return;
 
         }
