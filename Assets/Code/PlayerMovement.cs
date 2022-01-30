@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
+    public AudioSource source;
+    public AudioClip slapSound;
     public bool flying;
     public StickyHand s;
     public float groundDistance;
@@ -15,6 +17,10 @@ public class PlayerMovement : MonoBehaviour
     public float health = 100;
     public Image healthImage;
     Rigidbody rb;
+    public void playSlapSound()
+    {
+        source.PlayOneShot(slapSound);
+    }
     public void takeDamage()
     {
         health -= 60;
@@ -57,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
         vel.y = rb.velocity.y;
         if (Input.GetKey(KeyCode.Space) && onGround)
         {
-            vel.y = 10;
+            vel.y = 5;
         }
         rb.velocity = vel;
         transform.localEulerAngles = oldAngles+new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);

@@ -1763,6 +1763,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ae0b8953645bf42990ba40a2cb9c4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  source: {fileID: 0}
+  slapSound: {fileID: 0}
   flying: 0
   s: {fileID: 2037113013910587742}
   groundDistance: 1.01

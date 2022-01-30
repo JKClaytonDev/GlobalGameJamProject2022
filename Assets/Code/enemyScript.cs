@@ -63,6 +63,7 @@ public class enemyScript : MonoBehaviour
     }
     public void kill()
     {
+        player.GetComponent<PlayerMovement>().playSlapSound();
         Destroy(gameObject);
         GameObject c = Instantiate(ragdoll);
         c.transform.position = transform.position;
