@@ -10,6 +10,7 @@ public class enemyScript : MonoBehaviour
     bool activated;
     float checkTime;
     int targetMode;
+    public bool boss;
     NavMeshAgent n;
     GameObject player;
     float targetTime;
@@ -52,6 +53,12 @@ public class enemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (boss)
+        {
+            n.SetDestination(player.transform.position);
+            return;
+        }
+
         if (!activated)
             anim.SetBool("Shooting", false);
         if (!activated && Time.realtimeSinceStartup > checkTime)
