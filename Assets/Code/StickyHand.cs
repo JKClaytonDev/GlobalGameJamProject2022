@@ -38,10 +38,13 @@ public class StickyHand : MonoBehaviour
             localPos = Vector3.MoveTowards(localPos, playerRB.velocity / 255, Time.deltaTime);
             transform.position += localPos;
             lastStick = new Vector3();
-            if (stuckTo.GetComponent<NavMeshAgent>())
+            if (stuckTo)
             {
-                stuckTo.GetComponent<NavMeshAgent>().enabled = true;
-                stuckTo.GetComponent<enemyScript>().recalculate();
+                if (stuckTo.GetComponent<NavMeshAgent>())
+                {
+                    stuckTo.GetComponent<NavMeshAgent>().enabled = true;
+                    stuckTo.GetComponent<enemyScript>().recalculate();
+                }
             }
         }
         else
