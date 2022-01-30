@@ -56,6 +56,7 @@ public class enemyScript : MonoBehaviour
         if (boss)
         {
             n.SetDestination(player.transform.position);
+            n.speed = 15;
             return;
         }
 
