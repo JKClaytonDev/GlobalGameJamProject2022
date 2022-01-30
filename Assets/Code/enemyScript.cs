@@ -57,6 +57,13 @@ public class enemyScript : MonoBehaviour
         {
             n.SetDestination(player.transform.position);
             n.speed = 15;
+            if (n.remainingDistance < 0.3f)
+            {
+                player.GetComponent<PlayerMovement>().takeDamage();
+                player.GetComponent<PlayerMovement>().takeDamage();
+                player.GetComponent<PlayerMovement>().takeDamage();
+            }
+
             return;
         }
 
