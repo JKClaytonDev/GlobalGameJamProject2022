@@ -37,6 +37,8 @@ public class enemyScript : MonoBehaviour
     }
     public void Shoot()
     {
+        if (!activated)
+            return;
         source.PlayOneShot(gunSound);
         RaycastHit h2;
         transform.LookAt(player.transform);
@@ -50,9 +52,11 @@ public class enemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!activated)
+            anim.SetBool("Shooting", false);
         if (!activated && Time.realtimeSinceStartup > checkTime)
         {
-            anim.SetBool("Shooting", false);
+            
             checkTime += Random.Range(0.1f, 1f);
             RaycastHit h2;
             transform.LookAt(player.transform);
@@ -89,8 +93,9 @@ public class enemyScript : MonoBehaviour
             transform.LookAt(player.transform);
             n.speed = 0;
         }
-        
-        
+
+        if (!activated)
+            anim.SetBool("Shooting", false);
     }
     public void kill()
     {
