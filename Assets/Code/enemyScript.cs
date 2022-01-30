@@ -37,7 +37,7 @@ public class enemyScript : MonoBehaviour
         RaycastHit h2;
         transform.LookAt(player.transform);
         Physics.Raycast(transform.position, transform.forward, out h2);
-        if (h2.transform.gameObject == player && h2.distance < 55)
+        if (h2.transform.gameObject == player && h2.distance < 15)
         {
             player.GetComponent<PlayerMovement>().takeDamage();
         }
