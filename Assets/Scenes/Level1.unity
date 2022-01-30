@@ -23916,6 +23916,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4174233087330296450, guid: 683845b88b380754dbc5db74b010c249, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4174233087330296462, guid: 683845b88b380754dbc5db74b010c249, type: 3}
       propertyPath: m_RootOrder
       value: 41
@@ -25117,6 +25121,22 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1557395479, guid: b1a75b6b783337e4983b3b518005481a, type: 3}
+      propertyPath: sharedProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: b8d4d79db0f30754586df3592f18b32b, type: 2}
+    - target: {fileID: 1557395480, guid: b1a75b6b783337e4983b3b518005481a, type: 3}
+      propertyPath: m_ShowToolkit
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1557395480, guid: b1a75b6b783337e4983b3b518005481a, type: 3}
+      propertyPath: m_ShowCustomSorter
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2037113013685950328, guid: b1a75b6b783337e4983b3b518005481a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2037113014501748161, guid: b1a75b6b783337e4983b3b518005481a, type: 3}
       propertyPath: m_Name
       value: Player
