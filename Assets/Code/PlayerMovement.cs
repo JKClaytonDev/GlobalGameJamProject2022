@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
+    public bool flying;
     public StickyHand s;
     public float groundDistance;
     public bool onGround;
@@ -51,10 +52,8 @@ public class PlayerMovement : MonoBehaviour
         transform.localEulerAngles = newAngles;
         
         Vector3 vel = (transform.forward * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal")) * 15;
-        if (!s.attached)
-        {
+        if (flying)
             vel = new Vector3();
-        }
         vel.y = rb.velocity.y;
         if (Input.GetKey(KeyCode.Space) && onGround)
         {

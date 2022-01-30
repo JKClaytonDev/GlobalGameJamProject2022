@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StickyHand : MonoBehaviour
 {
+    
     public GameObject stuckTo;
     Vector3 lastStick;
     public Rigidbody playerRB;
@@ -26,6 +27,7 @@ public class StickyHand : MonoBehaviour
     {
         l.SetPosition(0, transform.position);
         l.SetPosition(1, underParent.transform.position);
+        player.GetComponent<PlayerMovement>().flying = false;
         if (attached)
         {
             transform.parent = parent.transform;
@@ -39,6 +41,8 @@ public class StickyHand : MonoBehaviour
         }
         else
         {
+            if (Vector3.Distance(transform.position, player.transform.position) > 5)
+                player.GetComponent<PlayerMovement>().flying = true;
             if (Vector3.Distance(transform.position, player.transform.position) > 2)
             player.transform.LookAt(transform.position);
             if (pull)
