@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.AI;
 public class enemyScript : MonoBehaviour
 {
+    public AudioSource source;
+    public AudioClip gunSound;
+    public AudioClip[] yellSounds;
     bool activated;
     float checkTime;
     int targetMode;
@@ -34,6 +37,7 @@ public class enemyScript : MonoBehaviour
     }
     public void Shoot()
     {
+        source.PlayOneShot(gunSound);
         RaycastHit h2;
         transform.LookAt(player.transform);
         Physics.Raycast(transform.position, transform.forward, out h2);
@@ -55,7 +59,10 @@ public class enemyScript : MonoBehaviour
             Physics.Raycast(transform.position, transform.forward, out h2);
             n.SetDestination(transform.position);
             if (h2.transform.gameObject == player && h2.distance < 55)
+            {
+                source.PlayOneShot(yellSounds[Random.Range(0, yellSounds.Length - 1)]);
                 recalculate();
+            }
             return;
 
         }
