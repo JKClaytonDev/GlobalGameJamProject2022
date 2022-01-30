@@ -25,7 +25,7 @@ public class enemyScript : MonoBehaviour
         RaycastHit h2;
         transform.LookAt(player.transform);
         Physics.Raycast(transform.position, transform.forward, out h2);
-        if (h2.transform.gameObject == player)
+        if (h2.transform.gameObject == player && h2.distance < 55)
         {
             player.GetComponent<PlayerMovement>().takeDamage();
         }
@@ -63,6 +63,7 @@ public class enemyScript : MonoBehaviour
     }
     public void kill()
     {
+        player.GetComponent<PlayerMovement>().playSlapSound();
         Destroy(gameObject);
         GameObject c = Instantiate(ragdoll);
         c.transform.position = transform.position;
