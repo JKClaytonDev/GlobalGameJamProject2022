@@ -31,7 +31,8 @@ public class RightHand : MonoBehaviour
         sticky.attached = false;
         RaycastHit hit;
         if (Physics.Raycast(parent.transform.position, parent.transform.forward, out hit)){
-            if (hit.transform.gameObject.GetComponent<PushPull>())
+            
+            if (hit.transform.gameObject.GetComponent<PushPull>() && hit.distance < 75)
             {
                 sticky.stuckTo = (hit.transform.gameObject);
                 sticky.pull = hit.transform.gameObject.GetComponent<PushPull>().pull;
