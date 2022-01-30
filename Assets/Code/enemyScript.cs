@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.AI;
 public class enemyScript : MonoBehaviour
 {
+    public AudioSource source;
+    public AudioClip gunSound;
+    public AudioClip[] yellSounds;
     bool activated;
     float checkTime;
     int targetMode;
@@ -34,6 +37,9 @@ public class enemyScript : MonoBehaviour
     }
     public void Shoot()
     {
+        if (!activated)
+            return;
+        source.PlayOneShot(gunSound);
         RaycastHit h2;
         transform.LookAt(player.transform);
         Physics.Raycast(transform.position, transform.forward, out h2);
@@ -46,16 +52,21 @@ public class enemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!activated)
+            anim.SetBool("Shooting", false);
         if (!activated && Time.realtimeSinceStartup > checkTime)
         {
-            anim.SetBool("Shooting", false);
+            
             checkTime += Random.Range(0.1f, 1f);
             RaycastHit h2;
             transform.LookAt(player.transform);
             Physics.Raycast(transform.position, transform.forward, out h2);
             n.SetDestination(transform.position);
             if (h2.transform.gameObject == player && h2.distance < 55)
+            {
+                source.PlayOneShot(yellSounds[Random.Range(0, yellSounds.Length - 1)]);
                 recalculate();
+            }
             return;
 
         }
@@ -82,8 +93,9 @@ public class enemyScript : MonoBehaviour
             transform.LookAt(player.transform);
             n.speed = 0;
         }
-        
-        
+
+        if (!activated)
+            anim.SetBool("Shooting", false);
     }
     public void kill()
     {
