@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 public class enemyScript : MonoBehaviour
 {
+    bool activated;
+    float checkTime;
     int targetMode;
     NavMeshAgent n;
     GameObject player;
@@ -34,7 +36,17 @@ public class enemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (!activated && Time.realtimeSinceStartup > checkTime)
+        {
+            checkTime += Random.Range(0.1f, 1f);
+            RaycastHit h2;
+            transform.LookAt(player.transform);
+            Physics.Raycast(transform.position, transform.forward, out h2);
+            if (h2.transform.gameObject == player && h2.distance < 55)
+            {
+                activated = true;
+            }
+        }
         if (Time.realtimeSinceStartup > targetTime)
         {
             if (targetMode == 1)
