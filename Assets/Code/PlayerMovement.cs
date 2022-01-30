@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
+    float yVel;
     public AudioSource source;
     public AudioClip slapSound;
     public bool flying;
@@ -65,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
         {
             vel.y = 5;
         }
+
         rb.velocity = vel;
         transform.localEulerAngles = oldAngles+new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);
     }
