@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class StickyHand : MonoBehaviour
 {
     
@@ -52,18 +52,22 @@ public class StickyHand : MonoBehaviour
             }
             else
             {
-                transform.position = Vector3.MoveTowards(transform.position, parent.transform.position, Time.deltaTime * 75);
+                transform.position = Vector3.MoveTowards(transform.position, parent.transform.position, Time.deltaTime * 25);
                 if (lastStick != new Vector3())
                 stuckTo.GetComponent<Rigidbody>().velocity = (transform.position - lastStick)/Time.deltaTime;
+                if (stuckTo.GetComponent<NavMeshAgent>())
+                    stuckTo.GetComponent<NavMeshAgent>().enabled = Vector3.Distance(transform.position, player.transform.position) > 2;
                 lastStick = transform.position;
             }
             
             if (Vector3.Distance(transform.position, player.transform.position) < 2)
             {
+                
                 pull = false;
             }
             if (Vector3.Distance(transform.position, parent.transform.position) < 0.1f)
             {
+
                 attached = true;
             }
         }

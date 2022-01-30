@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void takeDamage()
     {
-        health -= 60;
+        health -= 30;
     }
     // Start is called before the first frame update
     void Start()
