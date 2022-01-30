@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
+    public StickyHand s;
     public float groundDistance;
     public bool onGround;
     public LayerMask groundLayers;
     public Animator leftHand;
     public Animator rightHand;
+    public float health = 100;
+    public Image healthImage;
     Rigidbody rb;
+    public void takeDamage()
+    {
+        health -= 60;
+    }
     // Start is called before the first frame update
     void Start()
     {
+        health = 100;
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -21,6 +30,14 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Color c = Color.red;
+        c.a = (100 - health)/100;
+        healthImage.color = c;
+        if (health < 0)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        health += Time.deltaTime * 20;
+        if (health > 100)
+            health = 100;
         Time.timeScale = Mathf.MoveTowards(Time.timeScale, 1, Time.deltaTime*3);
         onGround = (Physics.Raycast(transform.position, Vector3.down, groundDistance, groundLayers));
         if (Input.GetMouseButtonDown(0))
@@ -32,7 +49,12 @@ public class PlayerMovement : MonoBehaviour
         newAngles.x = 0;
         newAngles.z = 0;
         transform.localEulerAngles = newAngles;
-        Vector3 vel = (transform.forward * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal")) * 15; ;
+        
+        Vector3 vel = (transform.forward * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal")) * 15;
+        if (!s.attached)
+        {
+            vel = new Vector3();
+        }
         vel.y = rb.velocity.y;
         if (Input.GetKey(KeyCode.Space) && onGround)
         {
