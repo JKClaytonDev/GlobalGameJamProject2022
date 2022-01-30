@@ -38,16 +38,26 @@ public class enemyScript : MonoBehaviour
     {
         if (!activated && Time.realtimeSinceStartup > checkTime)
         {
+            anim.SetBool("Shooting", false);
             checkTime += Random.Range(0.1f, 1f);
             RaycastHit h2;
             transform.LookAt(player.transform);
             Physics.Raycast(transform.position, transform.forward, out h2);
+            n.SetDestination(transform.position);
             if (h2.transform.gameObject == player && h2.distance < 55)
             {
                 activated = true;
+                Vector3 randomDirection = Random.insideUnitSphere * 25;
+                randomDirection += transform.position;
+                NavMeshHit hit;
+                NavMesh.SamplePosition(randomDirection, out hit, 25, 1);
+                Vector3 finalPosition = hit.position;
+                n.SetDestination(finalPosition);
             }
+            return;
+
         }
-        if (Time.realtimeSinceStartup > targetTime)
+        else if (Time.realtimeSinceStartup > targetTime)
         {
             if (targetMode == 1)
             {
