@@ -66,7 +66,8 @@ public class PlayerMovement : MonoBehaviour
         {
             vel.y = 5;
         }
-
+        if (vel.y > 5)
+            vel.y = 5;
         rb.velocity = vel;
         transform.localEulerAngles = oldAngles+new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);
     }
