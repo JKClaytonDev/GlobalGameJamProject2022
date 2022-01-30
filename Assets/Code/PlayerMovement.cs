@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
+    float mSens;
     float yVel;
     public AudioSource source;
     public AudioClip slapSound;
@@ -22,9 +23,9 @@ public class PlayerMovement : MonoBehaviour
     {
         source.PlayOneShot(slapSound);
     }
-    public void takeDamage()
+    public void takeDamage(int Damage)
     {
-        health -= 30;
+        health -= Damage;
     }
     // Start is called before the first frame update
     void Start()
@@ -33,11 +34,28 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        mSens = 1;
+        if (PlayerPrefs.HasKey("Sens") && PlayerPrefs.GetFloat("Sens") != 0)
+            mSens = PlayerPrefs.GetFloat("Sens");
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.Escape))
+            Application.Quit();
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            mSens /= 1.2f;
+            PlayerPrefs.SetFloat("Sens", mSens);
+            PlayerPrefs.Save();
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            mSens *= 1.2f;
+            PlayerPrefs.SetFloat("Sens", mSens);
+            PlayerPrefs.Save();
+        }
         Color c = Color.red;
         c.a = (100 - health)/100;
         healthImage.color = c;
@@ -69,6 +87,6 @@ public class PlayerMovement : MonoBehaviour
         if (vel.y > 5)
             vel.y = 5;
         rb.velocity = vel;
-        transform.localEulerAngles = oldAngles+new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);
+        transform.localEulerAngles = oldAngles+(new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0)*mSens);
     }
 }

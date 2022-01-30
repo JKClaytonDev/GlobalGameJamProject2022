@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 public class enemyScript : MonoBehaviour
 {
+    public int Damage = 30;
     public AudioSource source;
     public AudioClip gunSound;
     public AudioClip[] yellSounds;
@@ -46,7 +47,7 @@ public class enemyScript : MonoBehaviour
         Physics.Raycast(transform.position, transform.forward, out h2);
         if (h2.transform.gameObject == player && h2.distance < 25)
         {
-            player.GetComponent<PlayerMovement>().takeDamage();
+            player.GetComponent<PlayerMovement>().takeDamage(Damage);
         }
     }
 
@@ -59,9 +60,9 @@ public class enemyScript : MonoBehaviour
             n.speed = 15;
             if (n.remainingDistance < 0.3f)
             {
-                player.GetComponent<PlayerMovement>().takeDamage();
-                player.GetComponent<PlayerMovement>().takeDamage();
-                player.GetComponent<PlayerMovement>().takeDamage();
+                player.GetComponent<PlayerMovement>().takeDamage(25);
+                player.GetComponent<PlayerMovement>().takeDamage(25);
+                player.GetComponent<PlayerMovement>().takeDamage(25);
             }
 
             return;

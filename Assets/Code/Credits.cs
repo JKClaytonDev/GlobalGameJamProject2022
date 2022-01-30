@@ -9,7 +9,9 @@ public class Credits : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.realtimeSinceStartup > 10)
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        if (Input.GetKey(KeyCode.Space))
             SceneManager.LoadScene("Menu");
     }
 }

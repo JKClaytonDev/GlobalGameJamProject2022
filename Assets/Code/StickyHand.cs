@@ -33,10 +33,9 @@ public class StickyHand : MonoBehaviour
             transform.parent = parent.transform;
             pull = true;
             transform.localPosition = new Vector3();
-            transform.position = parent.transform.position;
+            
             transform.localEulerAngles = new Vector3(0, 180, 0);
-            localPos = Vector3.MoveTowards(localPos, playerRB.velocity / 255, Time.deltaTime);
-            transform.position += localPos;
+            
             lastStick = new Vector3();
             if (stuckTo)
             {
@@ -73,9 +72,9 @@ public class StickyHand : MonoBehaviour
                 
                 pull = false;
             }
-            if (Vector3.Distance(transform.position, parent.transform.position) < 0.1f)
+            if (Vector3.Distance(transform.position, parent.transform.position) < 1f)
             {
-
+                pull = false;
                 attached = true;
             }
         }

@@ -2365,7 +2365,7 @@ Transform:
   - {fileID: 935784766852540575}
   - {fileID: 2012209158083927645}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &8892565318090818304
 Rigidbody:
@@ -2409,7 +2409,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: -0.96
+  m_Pitch: -0.15
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -2524,12 +2524,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40dc0cbcf642e8e4e8b4074df9bf4b94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 0}
+  Damage: 20
+  source: {fileID: 8892565318090818306}
   gunSound: {fileID: 8300000, guid: a2c0a8b363b49b94fb781a02b657bf3f, type: 3}
   yellSounds:
   - {fileID: 8300000, guid: 7dd5cb3bd657a4147a885ecf6495d2db, type: 3}
   - {fileID: 8300000, guid: 9d0dc8f2f16dc074195a0dc55c805803, type: 3}
   - {fileID: 8300000, guid: 3c8e5435d051aaa47a363e030767919e, type: 3}
+  boss: 0
   ragdoll: {fileID: 9049099088235676061, guid: a2a4fc0efd8c368499214aa2292d0d8c, type: 3}
 --- !u!195 &8892565318090818307
 NavMeshAgent:
